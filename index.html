@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class VotingSystem {
+    public static void main(String[] args) {
+        ArrayList<String> votes = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        int timeLeft = 30;
+
+        System.out.println("Vote on a Law!");
+        System.out.println("Choose your vote:");
+        System.out.println("1. In favor");
+        System.out.println("2. Against");
+        System.out.println("3. Neutral");
+
+        while (timeLeft > 0) {
+            System.out.println("Time left: " + timeLeft + " seconds");
+            System.out.print("Enter your vote (1, 2, or 3): ");
+            String vote = scanner.nextLine();
+
+            if (vote.equals("1") || vote.equals("2") || vote.equals("3")) {
+                votes.add(vote);
+                timeLeft--;
+            } else {
+                System.out.println("Invalid vote. Please enter 1, 2, or 3.");
+            }
+        }
+
+        System.out.println("\nVoting Results:");
+        System.out.println("In favor: " + countVotes(votes, "1"));
+        System.out.println("Against: " + countVotes(votes, "2"));
+        System.out.println("Neutral: " + countVotes(votes, "3"));
+        System.out.println("Individual Votes:");
+
+        for (int i = 0; i < votes.size(); i++) {
+            System.out.println("Participant " + (i + 1) + ": " + votes.get(i));
+        }
+
+        scanner.close();
+    }
+
+    private static int countVotes(ArrayList<String> votes, String vote) {
+        int count = 0;
+        for (String v : votes) {
+            if (v.equals(vote)) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
